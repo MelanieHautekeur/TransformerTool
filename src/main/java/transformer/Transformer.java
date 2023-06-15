@@ -68,11 +68,12 @@ public class Transformer {
 		StringBuffer buffer = new StringBuffer();
 		
 		while( matcher.find() ) {
-			String replacement = tokens.get(matcher.group(1));
+			String match = matcher.group(1);
+			String replacement = tokens.get(match);
 			if( replacement != null ) {
 				matcher.appendReplacement(buffer, replacement);
 			} else {
-				logger.warn("Attention! La donnée {} est manquante et ne peut pas être remplacée.", matcher.group(1));
+				logger.warn("Attention! La donnée {} est manquante et ne peut pas être remplacée.", match);
 			}
 		}
 		//Si on entre pas dans la boucle, vient ajouter la fin du texte

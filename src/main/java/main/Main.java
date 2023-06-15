@@ -19,6 +19,7 @@ public class Main {
 		
 		georgesTransformer.removeToken("{phone}");
 		
-		logger.info(georgesTransformer.transform("Bonjour je suis {name}, j'habite au {address}, j'ai {age} ans, je suis encore {name}", georgesTransformer.tokens));
+		String result = georgesTransformer.transform("Bonjour je suis {name}, j'habite au {address}, j'ai {age} ans, je suis encore {name}", georgesTransformer.tokens);
+		logger.info(result);
 	}
 }
