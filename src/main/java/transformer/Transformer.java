@@ -33,9 +33,9 @@ public class Transformer {
 	public void addToken(String token, String value) {
 		String goodToken = "{" + token + "}";
 		if( tokens.containsKey(goodToken) ) {
-			logger.info(token + " : Donnée modifiée");
+			logger.info("{} : Donnée modifiée", token);
 		} else {
-			logger.info(token + " : Donnée initialisée");
+			logger.info("{} : Donnée initialisée", token);
 		}
 		tokens.put(goodToken, value);
 	}
@@ -50,9 +50,9 @@ public class Transformer {
 		String goodToken = "{" + token + "}";
 		if( tokens.containsKey(goodToken) ) {
 			tokens.remove(goodToken);
-			logger.info(token + " : Donnée supprimée");
+			logger.info("{} : Donnée supprimée", token);
 		} else {
-			logger.warn(token + " : Cette donnée n'existe pas");
+			logger.warn("{} : Cette donnée n'existe pas", token);
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class Transformer {
 			if( replacement != null ) {
 				matcher.appendReplacement(buffer, replacement);
 			} else {
-				logger.warn("Attention! La donnée " + matcher.group(1) + " est manquante et ne peut pas être remplacée.");
+				logger.warn("Attention! La donnée {} est manquante et ne peut pas être remplacée.", matcher.group(1));
 			}
 		}
 		//Si on entre pas dans la boucle, vient ajouter la fin du texte
