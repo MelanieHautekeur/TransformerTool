@@ -1,6 +1,10 @@
 package transformer;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.regex.Matcher;
 
 /**
@@ -13,6 +17,8 @@ import java.util.regex.Matcher;
  */
 public class Transformer {
 	public HashMap<String, String> tokens = new HashMap<String, String>();
+	
+	private static Logger logger = LoggerFactory.getLogger(Transformer.class);
 	
 	public Transformer() {
 	}
@@ -27,9 +33,9 @@ public class Transformer {
 	public void addToken(String token, String value) {
 		String goodToken = "{" + token + "}";
 		if( tokens.containsKey(goodToken) ) {
-			System.out.println(token + " : Donnée modifiée");
+			logger.info(token + " : Donnée modifiée");
 		} else {
-			System.out.println(token + " : Donnée initialisée");
+			logger.info(token + " : Donnée initialisée");
 		}
 		tokens.put(goodToken, value);
 	}
@@ -44,9 +50,9 @@ public class Transformer {
 		String goodToken = "{" + token + "}";
 		if( tokens.containsKey(goodToken) ) {
 			tokens.remove(goodToken);
-			System.out.println(token + " : Donnée supprimée");
+			logger.info(token + " : Donnée supprimée");
 		} else {
-			System.out.println(token + " : Cette donnée n'existe pas");
+			logger.warn(token + " : Cette donnée n'existe pas");
 		}
 	}
 	
@@ -66,7 +72,7 @@ public class Transformer {
 			if( replacement != null ) {
 				matcher.appendReplacement(buffer, replacement);
 			} else {
-				System.out.println("Attention! La donnée " + matcher.group(1) + " est manquante et ne peut pas être remplacée.");
+				logger.warn("Attention! La donnée " + matcher.group(1) + " est manquante et ne peut pas être remplacée.");
 			}
 		}
 		//Si on entre pas dans la boucle, vient ajouter la fin du texte
